@@ -1,7 +1,8 @@
 <template>
 	<q-input
-		class="col-6 q-ma-md bg-white"
-		filled
+		class="col-6 q-ma-md q-px-md bg-white"
+		standout
+		borderless
 		v-model="inputText"
 		@input="handleInput">
 		<template v-slot:prepend>
@@ -28,3 +29,9 @@ export default defineComponent({
 	},
 });
 </script>
+
+<style>
+.input {
+	border-radius: 5px;
+}
+</style>

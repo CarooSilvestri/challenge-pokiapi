@@ -85,7 +85,12 @@ export default defineComponent({
 		const copied = ref(false);
 
 		const setImgUrl = () => {
-			return props.pokeSelect.sprites.front_default;
+			try {
+				return props.pokeSelect.sprites.front_default;
+			} catch {
+				console.log("no hay imagen");
+				return;
+			}
 		};
 		const copylink = () => {
 			copyToClipboard("Mira mi pokemon favorito es " + props.pokeSelect.name);
