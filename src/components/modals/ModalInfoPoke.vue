@@ -13,11 +13,9 @@
 					:ripple="false"
 					class="q-mt-md q-mr-md"
 					@click="$emit('closeModal')" />
-				<!-- <div class="text-center">
-					<q-img
-						:src="require(pokeSelect.sprites.front_default)"
-						style="height: 180px; width: 180px" />
-				</div> -->
+				<div class="text-center">
+					<q-img :src="setImgUrl()" style="height: 180px; width: 180px" />
+				</div>
 			</q-card-section>
 
 			<q-card-section class="q-px-lg q-py-md">
@@ -40,20 +38,29 @@
 			</q-card-section>
 
 			<q-card-actions align="center" class="d-flex q-mb-md row justify-evenly">
-				<BtnAction
-					txt="Share to my friends"
-					:withIcon="false"
-					:disable="true" />
-				<BtnFav :withText="false" />
+				<div>
+					<BtnAction
+						txt="Share to my friends"
+						:withIcon="false"
+						:disable="true"
+						@click="copylink" />
+					<p v-if="copied" class="text-center">Copiado!</p>
+				</div>
+				<BtnFav :withText="false" :selected="isFaved" :disable="false" />
 			</q-card-actions>
 		</q-card>
 	</q-dialog>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+
+// Components
 import BtnAction from "../buttons/BtnAction.vue";
 import BtnFav from "../buttons/BtnFav.vue";
+
+// Utils
+import { copyToClipboard } from "quasar";
 
 export default defineComponent({
 	name: "ModalInfoPoke",
@@ -67,6 +74,28 @@ export default defineComponent({
 			type: Object,
 			required: true,
 		},
+		isFaved: {
+			modalOpen: {
+				type: Boolean,
+				required: true,
+			},
+		},
+	},
+	setup(props) {
+		const copied = ref(false);
+
+		const setImgUrl = () => {
+			return props.pokeSelect.sprites.front_default;
+		};
+		const copylink = () => {
+			copyToClipboard("Mira mi pokemon favorito es " + props.pokeSelect.name);
+			copied.value = true;
+		};
+		return {
+			copylink,
+			copied,
+			setImgUrl,
+		};
 	},
 });
 </script>

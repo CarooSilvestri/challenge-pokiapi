@@ -2,7 +2,7 @@
 	<div class="content">
 		<h1>Ho-oh!</h1>
 		<h4>You look lost on your journey!</h4>
-		<BtnAction to="/" :disabled="true" :with-icon="false" txt="Go back home" />
+		<BtnAction to="/" :disabled="true" :withIcon="false" txt="Go back home" />
 	</div>
 </template>
 

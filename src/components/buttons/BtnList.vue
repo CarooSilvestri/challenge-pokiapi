@@ -4,12 +4,12 @@
 			flat
 			:ripple="false"
 			color="transparent"
-			class="col-8"
+			class="col-10"
 			@click="handleClick"
 			align="left">
 			<p class="namePoke">{{ pokeName }}</p>
 		</q-btn>
-		<div class="col-2">
+		<div class="col-1">
 			<BtnFav
 				:withText="false"
 				:disable="false"

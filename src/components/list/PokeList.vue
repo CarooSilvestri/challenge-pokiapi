@@ -8,7 +8,8 @@
 	<ModalInfoPoke
 		:modalOpen="showModal"
 		:pokeSelect="infoPokemon"
-		@closeModal="closeModal()" />
+		@closeModal="closeModal()"
+		:isFaved="true" />
 </template>
 import EmptyStateVue from "../common/EmptyState.vue";
 

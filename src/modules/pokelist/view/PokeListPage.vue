@@ -1,28 +1,32 @@
 <template>
-	<div v-if="!pokeList || Object.keys(pokeList).length === 0">
-		<LoadState />
-	</div>
-	<div v-else>
-		<q-header class="col-12 bg-transparent">
-			<SearchBar @searchPokemon="searchPokemonByName" />
-		</q-header>
+	<div class="col-xs-10 col-md-6 q-pt-md">
+		<div v-if="!pokeList || Object.keys(pokeList).length === 0">
+			<LoadState />
+		</div>
+		<div v-else>
+			<q-header class="bg-transparent">
+				<SearchBar @searchPokemon="searchPokemonByName" />
+			</q-header>
 
-		<q-page-container class="col-8 no-spacing">
-			<PokeList :data="pokeList" />
-		</q-page-container>
+			<q-page-container class="col-8 no-spacing">
+				<PokeList :data="pokeList" />
+			</q-page-container>
 
-		<q-footer elevated class="bg-white q-py-sm text-center row justify-center">
-			<BtnAction
-				txt="All"
-				withIcon
-				:disable="btnActionSelected"
-				@click="handleClickBtnSelection" />
-			<BtnFav
-				withText
-				@click="handleClickBtnSelection"
-				:disable="btnFavSelected"
-				:selected="btnFavSelected" />
-		</q-footer>
+			<q-footer
+				elevated
+				class="bg-white q-py-sm text-center row justify-center q-gutter-md">
+				<BtnAction
+					txt="All"
+					withIcon
+					:disable="btnActionSelected"
+					@click="handleClickBtnSelection" />
+				<BtnFav
+					withText
+					@click="handleClickBtnSelection"
+					:disable="btnFavSelected"
+					:selected="btnFavSelected" />
+			</q-footer>
+		</div>
 	</div>
 </template>
 
@@ -52,6 +56,7 @@ export default defineComponent({
 		const pokeList = ref({});
 		const btnActionSelected = ref(true);
 		const btnFavSelected = ref(false);
+		const filteredList = ref({});
 
 		const fetchPokeData = async () => {
 			try {
@@ -67,16 +72,18 @@ export default defineComponent({
 			btnFavSelected.value = !btnFavSelected.value;
 			if (btnActionSelected.value) fetchPokeData();
 			if (btnFavSelected.value) {
-				pokeList.value = Object.values(pokeList.value).filter((pokemon) => {
+				filteredList.value = Object.values(pokeList.value).filter((pokemon) => {
 					pokemon.name === "pikachu";
 				});
 			}
+			pokeList.value = filteredList.value;
 		};
 
 		const searchPokemonByName = (value: string) => {
-			pokeList.value = Object.values(pokeList.value).filter((pokemon) => {
+			filteredList.value = Object.values(pokeList.value).filter((pokemon) => {
 				pokemon.name === value;
 			});
+			pokeList.value = filteredList.value;
 		};
 
 		onMounted(async () => {
@@ -97,6 +104,6 @@ export default defineComponent({
 
 <style>
 .no-spacing {
-	padding-top: 0;
+	padding-top: 0 !important;
 }
 </style>
