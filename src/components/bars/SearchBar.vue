@@ -4,7 +4,7 @@
 		standout
 		borderless
 		v-model="inputText"
-		@input="handleInput">
+		@change="$emit('searchPokemon', inputText)">
 		<template v-slot:prepend>
 			<q-icon name="search" />
 		</template>
@@ -19,12 +19,8 @@ export default defineComponent({
 	setup() {
 		const inputText = ref("");
 
-		const handleInput = () => {
-			console.log(inputText);
-		};
 		return {
 			inputText,
-			handleInput,
 		};
 	},
 });

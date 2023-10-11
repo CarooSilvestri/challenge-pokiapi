@@ -5,7 +5,8 @@
 		</div>
 		<div v-else>
 			<q-header class="bg-transparent">
-				<SearchBar @searchPokemon="searchPokemonByName" />
+				<SearchBar
+					@searchPokemon="(inputText) => searchPokemonByName(inputText)" />
 			</q-header>
 
 			<q-page-container class="col-8 no-spacing">
@@ -86,6 +87,7 @@ export default defineComponent({
 				return pokemon.name === value;
 			});
 			pokeList.value = filteredList.value;
+			return pokeList;
 		};
 
 		onMounted(async () => {
