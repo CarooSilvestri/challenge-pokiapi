@@ -1,0 +1,39 @@
+// app global css in SCSS form
+
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Regular.ttf");
+}
+
+* {font-family: "Lato"}
+
+body {
+    background-color: $bgColorApp;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 31.2px;
+    color: $font-primary
+}
+
+h4 {
+    font-size: 18px;
+    line-height: 27px;
+    color: $font-secondary
+}
+
+p{
+    margin-bottom: 0;
+    color: $font-secondary;
+    font-size: 18px;
+    text-transform: initial;
+}
+
+.spacing-btn {
+	font-size: 18px;
+	padding-left: 8%;
+	padding-right: 8%;
+   
+}
