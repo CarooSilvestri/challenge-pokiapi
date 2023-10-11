@@ -70,18 +70,20 @@ export default defineComponent({
 		const handleClickBtnSelection = () => {
 			btnActionSelected.value = !btnActionSelected.value;
 			btnFavSelected.value = !btnFavSelected.value;
-			if (btnActionSelected.value) fetchPokeData();
+			if (btnActionSelected.value) {
+				fetchPokeData();
+				return pokeList;
+			}
 			if (btnFavSelected.value) {
-				filteredList.value = Object.values(pokeList.value).filter((pokemon) => {
-					pokemon.name === "pikachu";
+				pokeList.value = Object.values(pokeList.value).filter((pokemon) => {
+					return pokemon.name === "pikachu";
 				});
 			}
-			pokeList.value = filteredList.value;
 		};
 
 		const searchPokemonByName = (value: string) => {
 			filteredList.value = Object.values(pokeList.value).filter((pokemon) => {
-				pokemon.name === value;
+				return pokemon.name === value;
 			});
 			pokeList.value = filteredList.value;
 		};

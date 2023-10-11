@@ -2,7 +2,7 @@
 	<q-input
 		class="col-6 q-ma-md bg-white"
 		filled
-		v-model="textInput"
+		v-model="inputText"
 		@input="handleInput">
 		<template v-slot:prepend>
 			<q-icon name="search" />
@@ -11,19 +11,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
 	name: "SearchBar",
-	data() {
-		return {
-			textInput: "",
+	setup() {
+		const inputText = ref("");
+
+		const handleInput = () => {
+			console.log(inputText);
 		};
-	},
-	methods: {
-		handleInput() {
-			console.log(this.textInput);
-		},
+		return {
+			inputText,
+			handleInput,
+		};
 	},
 });
 </script>
